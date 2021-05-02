@@ -37,8 +37,8 @@ public:
 
 		//Default Penalties
 		match_penalty = 1;
-		mismatch_penalty = -1;
-		gap_penalty = -2;
+		mismatch_penalty = 3;
+		gap_penalty = 2;
 	}
 
 	void Print_Matrix()
@@ -59,10 +59,11 @@ public:
 		this->gene2 = gene2;
 	}
 
-	void setPenalty(int mismatch, int gp)
+	void setPenalty(int mismatch, int gp,int match)
 	{
 		mismatch_penalty = mismatch;
 		gap_penalty = gp;
+		match_penalty=match;
 	}
 
 	void setMatrix()
@@ -79,7 +80,7 @@ public:
 		}
 
 		// Other matrix values
-		//cout<<match_penalty<<"   "<<mismatch_penalty<<"  "<<gap_penalty;
+
 		for (int i = 1; i < x; i++)
 		{
 			for (int j = 1; j < y; j++)
@@ -105,7 +106,7 @@ public:
 
 		int i = lenGene1;								//backtracking from the last value of matrix
 		int j = lenGene2;
-		//		cout<<"LENGTH OF GENE 1 : " <<lenGene1;
+	
 
 		int xpos = maxLength;	//maxlength =7
 		int ypos = maxLength;
@@ -115,7 +116,7 @@ public:
 		//2) IF A MISMATCH GO TO NEAREST BLOCK VALUE.
 
 
-		//int gene1Ans[maxLength + 1], gene2Ans[maxLength + 1];								//Final Answers!
+							//Final Answers!
 		int* gene1Ans = new int[maxLength + 1];
 		int* gene2Ans = new int[maxLength + 1];
 
@@ -125,12 +126,11 @@ public:
 			if (this->gene1[i - 1] == this->gene2[j - 1]) {								//If it is match then go diagnol.
 
 				gene1Ans[xpos--] = (int)this->gene1[i - 1];
-				gene2Ans[ypos--] = (int)this->gene2[i - 1];
+				gene2Ans[ypos--] = (int)this->gene2[j - 1];
 
 				i--;
 				j--;
-				cout<<cout<< (char)gene2Ans[ypos]<<endl;
-				cout<< xpos<<"  "<<ypos<<endl;
+
 			}
 			//IF LETTERS ARE NOT SAME THEN  WE NEED TO FIND THE HIGHEST VALUE OF NEIGHBOURS ( ISKO KARNE KELIYE JO UPAR SETMARIX() MAI MINUS KARA THA WOH PLUS KARDO
 
@@ -144,7 +144,7 @@ public:
 
 			}
 			else if (mat[i - 1][j] + gap_penalty == mat[i][j]) {	//FOR LEFT CASE
-
+			
 				gene1Ans[xpos--] = (int)this->gene1[i - 1];
 
 				gene2Ans[ypos--] = (int)'_';
@@ -159,62 +159,67 @@ public:
 				j--;
 			}
 		}
-		
-		while (i> 0 &&  j==0)
-		{
-			gene1Ans[xpos--] = (int)this->gene1[i - 1];
-			gene2Ans[ypos--] = (int)'*';
-			i--;
-		}
+			
 
-	/*	while (xpos > 0)
-		{
-			//if (i > 0) First_Aligned_Gene[Position_Of_First_Gene--] = (int)x[--i];
-			//else First_Aligned_Gene[Position_Of_First_Gene--] = (int)'_';
-			if (i > 0) gene1Ans[xpos--] = (int)gene1[--i];
-			else gene1Ans[xpos--] = (int)'_';
+		while (xpos > 0)
+		{		
+
+			if (i > 0) {
+				
+				gene1Ans[xpos--] = (int)gene1[--i];
+				
+			}
+	
+			else gene1Ans[xpos--] = (int)'_';	//Filling the starting gaps 
 		}
 		while (ypos > 0)
 		{
-			if (j > 0) gene2Ans[ypos--] = (int)gene2[--j];
-			else gene2Ans[ypos--] = (int)'_';
-		}*/
+			if (j > 0){
+				
+				 gene2Ans[ypos--] = (int)gene2[--j];
+			}
+			else {
+			
+			gene2Ans[ypos--] = (int)'_';	//Filling the starting gaps.
+			
+			}
 
 
-		/*int id = 1;
+		int gapsEncountered = 1;
 		for (int i = maxLength; i >= 1; i--)
 		{
-			if ((char)gene1Ans[i] == '_' && (char)gene2Ans[i] == '_')
+			if ( (char)gene1Ans[i] == '_' && (char)gene2Ans[i] == '_')		//Yeh id ki value waha tak laraha hai jahan tk dashes lagey wai hain in the starting.
 			{
-				id = i + 1;
+				gapsEncountered = i + 1;
 				break;
 			}
-		}*/
+		}
 
-		//int Minimum_Penalty = mat[lenGene1][lenGene2];
-		//std::cout << "Minimum_Penalty in aligning the Genes = ";
-		//std::cout << Minimum_Penalty << std::endl;
 		std::cout << "The Aligned Genes Are :" << std::endl;
-		for (i = xpos+1; i <= maxLength; i++)
-		{
-			std::cout << (char)gene1Ans[i];
-		}
-		std::cout << "\n";
-		for (i = ypos+1; i <= maxLength; i++)
-		{
-			std::cout << (char)gene2Ans[i];
-		}
-		std::cout << "\n";
+
+
+	    for (i = gapsEncountered; i <= maxLength; i++)
+	    {
+	        cout<<(char)gene1Ans[i];
+	    }
+	    cout << "\n";
+	    for (i = gapsEncountered; i <= maxLength; i++)
+	    {
+	        cout << (char)gene2Ans[i];
+	    }
 	}
 };
 
 int main()
 {
-	string gene2 = "TCG";      //Remove case sensitivity
-	string gene1 = "ATCG";
+//	string gene2 = "TCG";      //Remove case sensitivity	(CASE WORKING)
+//	string gene1 = "ATCG";
 
-	//string gene1 = "CA";
-	//string gene2 = "CG";
+//	string gene1 = "ATGCT";      //Remove case sensitivity	(THIS CASE IS WORKING)
+//	string gene2 = "AGCT";
+	
+	//	string gene1 = "CA";	//THIS CASE IS WORKING
+	//	string gene2 = "CG";
 
 	//string gene1 = "GAGC";      //Remove case sensitivity
 	//string gene2 = "GATC";       //TEST CASE FROM THAT ROUGH VIDEO
@@ -227,14 +232,27 @@ int main()
 	 
 	  //string gene1 = "CCATACGA";
 	  //string gene2 = "CAGCTAGCG";
+	  
+//	  string gene1 = "AGGGCT";
+//    	string gene2 = "AGGCA";
 
 	// intialsing penalties of different types
-	int misMatchPenalty = -1;
-	int gapPenalty = -1;
+	int matchPenalty;
+	int misMatchPenalty ;
+	int gapPenalty ;
+	cout<<"Enter the value of Match Penalty" << endl;
+	cin >>  matchPenalty;
+	
+	cout<<"Enter the value of misMatchPenalty Penalty" << endl;
+	cin >>  misMatchPenalty;
+	
+	cout<<"Enter the value of gapPenalty Penalty" << endl;
+	cin >>  gapPenalty;
+
 
 	Matrix dp(gene1.length(), gene2.length());
 	dp.setGenes(gene1, gene2);
-	dp.setPenalty(misMatchPenalty, gapPenalty);
+	dp.setPenalty(misMatchPenalty, gapPenalty,matchPenalty);
 	dp.setMatrix();
 	dp.Print_Matrix();
 	dp.FinalResStrings();

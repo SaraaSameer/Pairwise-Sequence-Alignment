@@ -3,7 +3,8 @@
 #include<string>
 #include<fstream>
 #include<algorithm>
-
+#include<iomanip>
+#include<unistd.h>
 using namespace std;
 
 class Matrix
@@ -18,6 +19,7 @@ private:
 	int mismatch_penalty;
 	int gap_penalty;
 	int minimum_penalty;
+	
 public:
 	Matrix(int gene1Len, int gene2Len)
 	{
@@ -92,6 +94,7 @@ public:
 			}
 		}
 	}
+	
 	void FinalResStrings() 
 	{
 		int lenGene2 = x - 1;		
@@ -182,10 +185,8 @@ public:
 			}
 		}
 	
-		cout <<endl<< "Minimum Penalty in aligning the genes = ";
-		cout << minimum_penalty << "\n";
-		cout << "The Aligned Genes Are :" << std::endl;
-
+		cout<<endl<<"Step02: Deducing the alignment by tracing back the scoring matrix"<<endl<<endl;
+		cout << "The Aligned Genes Are :" << endl;
 		for (i = gapsEncountered; i <= maxLength; i++)
 		{
 			cout<<(char)gene1Ans[i];
@@ -194,7 +195,10 @@ public:
 		for (i = gapsEncountered; i <= maxLength; i++)
 		{
 			cout << (char)gene2Ans[i];
-		}		
+		}
+		
+		cout <<endl<< "Minimum Penalty in aligning the genes = ";
+		cout << minimum_penalty << "\n";		
 	}	
 };
 
@@ -202,13 +206,12 @@ int main()
 {
 	string gene1;    
 	string gene2;
-	
 	int matchPenalty;
 	int misMatchPenalty;
 	int gapPenalty;
 
 	clock_t start = clock();
-	
+	cout<<"Reading Input from file..."<<endl<<endl;
 	fstream fin("Input.txt");
 	fin >> gene1;
 	fin >> gene2;
@@ -216,14 +219,20 @@ int main()
 	fin >> misMatchPenalty;
 	fin >> gapPenalty;
 	
+	cout<<"Gene01: "<<gene1<<endl;
+	cout<<"Gene02: "<<gene2<<endl;
+	cout<<"Match Penalty: "<<matchPenalty<<endl;
+	cout<<"Mismatch Penalty: "<<misMatchPenalty<<endl;
+	cout<<"Gap Penalty: "<<gapPenalty<<endl;
+	
 	Matrix dp(gene1.length(), gene2.length());
 	dp.setGenes(gene1, gene2);
 	dp.setPenalty(misMatchPenalty, gapPenalty,matchPenalty);
 	dp.setMatrix();
+	cout<<endl<<endl;
+	cout<<"STEP 01: Designing scoring matrix by calculating penalties"<<endl<<endl;
 	dp.Print_Matrix();
 	dp.FinalResStrings();
-	
 	clock_t end = clock();
-	
-	cout << endl << "Work took " << (end-start) << "seconds" << endl;
+	cout << endl << "Program Execution Time: " << setprecision(4)<< (end-start)  << " seconds" << endl;
 }

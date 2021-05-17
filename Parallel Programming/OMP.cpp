@@ -4,7 +4,7 @@
 #include<string>
 #include<fstream>
 #include<omp.h>
-
+#include<iomanip>
 using namespace std;
 
 int matchPenalty;
@@ -162,8 +162,9 @@ void Final_Resultant_Strings(struct gene_struct shared_block)
 		}
 	}
 
-	cout << endl << "Minimum Penalty in aligning the genes = " << minimum_penalty << endl;
-	cout << "The Aligned Genes Are : \n";
+	
+	cout<<endl<<"Step02: Deducing the alignment by tracing back the scoring matrix"<<endl<<endl;
+	cout << "The Aligned Genes Are :" << endl;
 	
 	for (i = gapsEncountered; i <= maxLength; i++)
 	{
@@ -177,7 +178,9 @@ void Final_Resultant_Strings(struct gene_struct shared_block)
 		cout << (char)shared_block.gene2Result[i];
 	}
 	
-	cout << endl;		
+	cout << endl;	
+	cout << "Minimum Penalty in aligning the genes = " << minimum_penalty << endl;
+		
 }	
 void Print_Matrix(struct gene_struct shared_block)
 {
@@ -201,13 +204,19 @@ int main(){
 	
 	string gene1, gene2;
 	struct gene_struct shared_block;
-	
+	cout<<"Reading Input from file..."<<endl<<endl;  
 	fstream fin("Input.txt");
 	fin >> gene1;
 	fin >> gene2;
 	fin >> matchPenalty;
 	fin >> misMatchPenalty;
 	fin >> gapPenalty;
+	
+	cout<<"Gene01: "<<gene1<<endl;
+	cout<<"Gene02: "<<gene2<<endl;
+	cout<<"Match Penalty: "<<matchPenalty<<endl;
+	cout<<"Mismatch Penalty: "<<misMatchPenalty<<endl;
+	cout<<"Gap Penalty: "<<gapPenalty<<endl;
 	
 	shared_block.gene1 = gene1;
 	shared_block.gene2 = gene2;
@@ -226,11 +235,12 @@ int main(){
 		}	
  	}
 	Set_Matrix(shared_block);
-	Final_Resultant_Strings(shared_block);
+	cout<<endl<<endl;
+	cout<<"STEP 01: Designing scoring matrix by calculating penalties"<<endl<<endl;
 	Print_Matrix(shared_block);
-	
+	Final_Resultant_Strings(shared_block);
 	end = omp_get_wtime(); 
-	cout << endl << "Work took " << (end-start) << "seconds" << endl;	
+	cout << endl << "Program Execution Time:" << setprecision(4)<<(end-start)<< " seconds" << endl;	
 	return 0;
 }
 

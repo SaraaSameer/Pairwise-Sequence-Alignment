@@ -288,5 +288,8 @@ int main()
         Final_Resultant_Strings(shared_block);
         clock_t end = clock();
         cout << endl << "Program Execution Time: " << setprecision(4)<< double((end-start)/double(CLOCKS_PER_SEC))  << " seconds" << endl;
+        fstream fout("Output_Time_Pthread.txt",ios::out);
+        fout << double((end-start)/double(CLOCKS_PER_SEC));
+        fout.close();
 }
 

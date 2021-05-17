@@ -241,6 +241,9 @@ int main(){
 	Final_Resultant_Strings(shared_block);
 	end = omp_get_wtime(); 
 	cout << endl << "Program Execution Time:" << setprecision(4)<<(end-start)<< " seconds" << endl;	
+	fstream fout("Output_Time_OpenMP.txt" , ios::out);
+	fout << (end-start);
+	fout.close();
 	return 0;
 }
 

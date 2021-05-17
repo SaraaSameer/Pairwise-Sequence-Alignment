@@ -219,6 +219,8 @@ int main()
 	fin >> misMatchPenalty;
 	fin >> gapPenalty;
 	
+	fin.close();
+	
 	cout<<"Gene01: "<<gene1<<endl;
 	cout<<"Gene02: "<<gene2<<endl;
 	cout<<"Match Penalty: "<<matchPenalty<<endl;
@@ -234,5 +236,10 @@ int main()
 	dp.Print_Matrix();
 	dp.FinalResStrings();
 	clock_t end = clock();
+	
 	cout << endl << "Program Execution Time: " << setprecision(4)<< (end-start)  << " seconds" << endl;
+	
+	fstream fout("Output_Time_Serial.txt",ios::out);
+	fout << (end-start);
+	fout.close();
 }

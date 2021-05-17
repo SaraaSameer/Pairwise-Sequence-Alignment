@@ -2,7 +2,7 @@
 # Pairwise-Sequence-Alignment
 
 ## Problem Statement
-The goal of the project is to compare time cycles taken by the Sequence Alignment problem when solved with serial, openMP and MPI techniques.The time comparisons are also visualized using the matplot.lib from Python.
+The goal of the project is to compare time cycles taken by the Sequence Alignment problem when solved with serial, openMP and pThreads techniques.The time comparisons are also visualized using the matplot.lib from Python.
 ### Prerequisites and Requirements for Serial Source Code 
 Before you can run the program In Serial , you need to : 
 

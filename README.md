@@ -22,9 +22,9 @@ We have worked on Linux Pthreads and OpenMP so the program shall be executed in 
 
 ##### Program Execution 
 
-    -> Write the following command in Terminal for Pthreads:  g++ -o h1 filename.c -lpthread , ./h1
+    -> Write the following command in Terminal for Pthreads:  g++ -o h1 filename.c -lpthread  - > /h1
     
-    -> Write the following command in Terminal for Pthreads:   g++ -o omp OMP.cpp -fopenmp , ./omp
+    -> Write the following command in Terminal for OpenMP:   g++ -o omp OMP.cpp -fopenmp -> ./omp
 
 #### Time Comparison Visualization Using Matplot.lib:
 

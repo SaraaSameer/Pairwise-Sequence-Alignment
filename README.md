@@ -1,6 +1,6 @@
 # Pairwise-Sequence-Alignment
 ## Problem Statement
-The goal of the project is to compare time cycles taken by the Sequence Alignment problem when solved with serial, openMP and MPI techniques.
+The goal of the project is to compare time cycles taken by the Sequence Alignment problem when solved with serial, openMP and MPI techniques.The time comparisons are also visualized using the matplot.lib from Python.
 ### Prerequisites and Requirements for Serial Source Code 
 Before you can run the program In Serial , you need to : 
 
@@ -15,6 +15,7 @@ You can easily download  IDE's from :
 *Visual Studio Code : https://visualstudio.microsoft.com/vs/
 
 ####Running Pthreads and OpenMP code :
+
 We have worked on Linux Pthreads and OpenMP so the program shall be executed in any IDE available on linux Operating systems
 
 ##### Program Execution 

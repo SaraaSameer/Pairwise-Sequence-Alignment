@@ -1,4 +1,6 @@
+
 # Pairwise-Sequence-Alignment
+
 ## Problem Statement
 The goal of the project is to compare time cycles taken by the Sequence Alignment problem when solved with serial, openMP and MPI techniques.The time comparisons are also visualized using the matplot.lib from Python.
 ### Prerequisites and Requirements for Serial Source Code 
@@ -24,7 +26,10 @@ We have worked on Linux Pthreads and OpenMP so the program shall be executed in 
     
     -> Write the following command in Terminal for Pthreads:   g++ -o omp OMP.cpp -fopenmp , ./omp
 
-    
+#### Matplot Visualization:
+
+![matplot](https://user-images.githubusercontent.com/29493186/118481347-d1215a00-b72c-11eb-8739-73c68c6b80ec.jpeg)
+
 
 ##### Acknowledgment
 

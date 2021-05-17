@@ -16,7 +16,7 @@ You can easily download  IDE's from :
  
 *Visual Studio Code : https://visualstudio.microsoft.com/vs/
 
-####Running Pthreads and OpenMP code :
+#### Running Pthreads and OpenMP code :
 
 We have worked on Linux Pthreads and OpenMP so the program shall be executed in any IDE available on linux Operating systems
 
@@ -26,7 +26,7 @@ We have worked on Linux Pthreads and OpenMP so the program shall be executed in 
     
     -> Write the following command in Terminal for Pthreads:   g++ -o omp OMP.cpp -fopenmp , ./omp
 
-#### Matplot Visualization:
+#### Time Comparison Visualization Using Matplot.lib:
 
 ![matplot](https://user-images.githubusercontent.com/29493186/118481347-d1215a00-b72c-11eb-8739-73c68c6b80ec.jpeg)
 

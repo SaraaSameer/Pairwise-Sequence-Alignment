@@ -44,7 +44,6 @@ void Set_Matrix(struct gene_struct shared_block){
 		#pragma omp for 
 		for (int j = 1; j < shared_block.colSize ; j++)
 		{
-			//cout << endl << "Thread: " << omp_get_thread_num() << endl;
 			if (shared_block.gene1[j - 1] == shared_block.gene2[i - 1])    //Similar gene values (A==A ||T==T)
 			{
 				shared_block.mat[i][j] = shared_block.mat[i - 1][j - 1] + matchPenalty;
@@ -162,7 +161,6 @@ void Final_Resultant_Strings(struct gene_struct shared_block)
 		}
 	}
 
-	
 	cout<<endl<<"Step02: Deducing the alignment by tracing back the scoring matrix"<<endl<<endl;
 	cout << "The Aligned Genes Are :" << endl;
 	
@@ -227,13 +225,13 @@ int main(){
 	
 	#pragma omp parallel num_threads(shared_block.rowSize)
 	{
-		//printf("Number of Threads: %d\n" , omp_get_thread_num());
 		#pragma omp for 
 		for (int i = 0; i < shared_block.rowSize; i++)
 		{
 			shared_block.mat[i] = new int[shared_block.colSize];   
 		}	
  	}
+	 
 	Set_Matrix(shared_block);
 	cout<<endl<<endl;
 	cout<<"STEP 01: Designing scoring matrix by calculating penalties"<<endl<<endl;

@@ -24,7 +24,7 @@ public:
 	Matrix(int gene1Len, int gene2Len)
 	{
 		x = gene2Len + 1;			//gene2 length
-		y = gene1Len + 1; 	//gene 1 length;
+		y = gene1Len + 1; 			//gene 1 length;
 		mat = new int* [x];
 		for (int i = 0; i < x; i++)
 		{
@@ -116,7 +116,7 @@ public:
 				gene2Ans[ypos--] = (int)this->gene2[j - 1];
 				i--;
 				j--;
-                		minimum_penalty= minimum_penalty + match_penalty;
+				minimum_penalty= minimum_penalty + match_penalty;
 			}
 			else if (mat[i - 1][j - 1] + mismatch_penalty == mat[i][j]) 
 			{	
@@ -180,7 +180,6 @@ public:
 			if ( (char)gene1Ans[i] == '_' && (char)gene2Ans[i] == '_')		
 			{
 				gapsEncountered = i + 1;
-			
 				break;
 			}
 		}
@@ -192,6 +191,7 @@ public:
 			cout<<(char)gene1Ans[i];
 		}
 		cout << endl;
+		
 		for (i = gapsEncountered; i <= maxLength; i++)
 		{
 			cout << (char)gene2Ans[i];
